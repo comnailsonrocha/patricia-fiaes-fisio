@@ -1,7 +1,7 @@
 export const GALLERY_PHOTOS = [
   {
     id: "profile",
-    title: "Foto profissional",
+    title: "Foto capa",
     category: "Perfil",
     url: "https://pub-846739d770c54597941b758e3972a56b.r2.dev/imagens/img1.jpeg",
     caption: "Foto de perfil profissional"

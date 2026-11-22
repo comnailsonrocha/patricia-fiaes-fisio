@@ -25,8 +25,7 @@ import {
 const CERTS_PREVIEW = 6;
 
 // Foto: use PROFESSIONAL_DATA.photo quando existir; senão, imagem provisória
-const FALLBACK_PHOTO =
-  'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80';
+const FALLBACK_PHOTO = PROFESSIONAL_DATA.url;
 
 const EASE = [0.22, 1, 0.36, 1];
 

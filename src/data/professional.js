@@ -9,7 +9,7 @@ export const PROFESSIONAL_DATA = {
   email: "patriciafiaes8@gmail.com",
   instagram: "@fisiopatriciafiaes",
   instagramUrl: "https://instagram.com/fisiopatriciafiaes",
-  calComUrl: "https://cal.com", // Adicione o link real do Cal.com aqui quando configurado
+  url: 'https://pub-846739d770c54597941b758e3972a56b.r2.dev/imagens/img5.jpeg',
   address: "Ed. Alpha Medical Center - Av. Luís Viana Filho - Alphaville I, Salvador - BA",
   heroHeadline: "Recupere seus movimentos e retome sua rotina com confiança.",
   heroSubheadline: "Atendimento fisioterapêutico individualizado, com foco na avaliação, no alívio da dor e na recuperação da funcionalidade, respeitando as necessidades específicas de cada paciente.",
