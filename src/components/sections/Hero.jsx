@@ -13,11 +13,11 @@ import {
   Heart,
   Users,
   Flower2,
-  Camera,
   Sparkles,
   ChevronDown,
 } from 'lucide-react';
 
+import { GALLERY_PHOTOS } from '../../data/gallery';
 import { PROFESSIONAL_DATA } from '../../data/professional';
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -47,6 +47,9 @@ const Hero = ({ onBookClick }) => {
   const headlineParts = headline.match(
     /^(Recupere seus movimentos)\s+(e retome sua rotina com confiança\.)$/i
   );
+
+  /* BUSCANDO IMAGENS */
+  const profile = GALLERY_PHOTOS.find((item) => item.id === 'profile');
 
   /* PARALLAX SUAVE COM O MOUSE */
   const mx = useMotionValue(0);
@@ -106,7 +109,7 @@ const Hero = ({ onBookClick }) => {
       onMouseMove={handleMouseMove}
       className="
         relative
-        min-h-screen
+        min-h-dvh
         overflow-hidden
         bg-[#F7F6F0]
         pt-36
@@ -118,12 +121,13 @@ const Hero = ({ onBookClick }) => {
     >
       {/* ============ FUNDO DECORATIVO ============ */}
 
-      {/* Orbes com movimento lento */}
+      {/* Orbes com movimento lento (escondidos no celular por performance) */}
       <motion.div
         aria-hidden="true"
         {...drift(40, 30, 18)}
         className="
           absolute
+          hidden md:block
           -top-40 -left-40
           w-125 h-125
           rounded-full
@@ -137,6 +141,7 @@ const Hero = ({ onBookClick }) => {
         {...drift(-50, 40, 22, 2)}
         className="
           absolute
+          hidden md:block
           top-10 -right-40
           w-137.5 h-137.5
           rounded-full
@@ -150,6 +155,7 @@ const Hero = ({ onBookClick }) => {
         {...drift(30, -25, 26, 1)}
         className="
           absolute
+          hidden md:block
           -bottom-72 -left-32
           w-175 h-125
           rounded-[50%]
@@ -635,21 +641,25 @@ const Hero = ({ onBookClick }) => {
                   bg-[#EDE8DE]
                 "
               >
-                {/* IMAGEM PROVISÓRIA */}
-                <img
-                  src="/images/foto-profissional.png"
-                  alt="Espaço reservado para fotografia profissional de Patrícia Fiaes"
-                  className="
-                    absolute
-                    inset-0
-                    w-full h-full
-                    object-cover
-                    object-center
-                  "
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                  }}
-                />
+                {/* IMAGEM */}
+                {profile?.url && (
+                  <img
+                    src={profile.url}
+                    alt="Patrícia Fiaes, fisioterapeuta"
+                    fetchPriority="high"
+                    decoding="async"
+                    className="
+                      absolute
+                      inset-0
+                      w-full h-full
+                      object-cover
+                      object-center
+                    "
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                )}
 
                 {/* SOBREPOSIÇÃO SUAVE */}
                 <div
@@ -663,62 +673,6 @@ const Hero = ({ onBookClick }) => {
                     pointer-events-none
                   "
                 />
-
-                {/* IDENTIFICAÇÃO DA FOTO */}
-                <div
-                  className="
-                    absolute
-                    inset-0
-                    flex flex-col
-                    items-center
-                    justify-center
-                    text-center
-                    pointer-events-none
-                  "
-                >
-                  <motion.div
-                    {...bob(8, 5)}
-                    className="
-                      w-28 h-28
-                      sm:w-32 sm:h-32
-                      rounded-full
-                      bg-[#F3EEE7]/80
-                      backdrop-blur-sm
-                      flex items-center justify-center
-                      mb-5
-                    "
-                  >
-                    <Camera
-                      size={56}
-                      strokeWidth={1.2}
-                      className="text-[#806348]"
-                    />
-                  </motion.div>
-                  <span
-                    className="
-                      font-serif
-                      text-5xl
-                      sm:text-6xl
-                      text-[#49382E]
-                      leading-none
-                    "
-                  >
-                    Foto
-                  </span>
-                  <span
-                    className="
-                      font-serif
-                      italic
-                      text-4xl
-                      sm:text-5xl
-                      text-[#49382E]
-                      mt-1
-                    "
-                  >
-                    Profissional
-                  </span>
-                  <div className="w-20 h-0.5 bg-[#C4A078] mt-6" />
-                </div>
               </div>
 
               {/* CARTÃO FLUTUANTE 1 */}
@@ -733,14 +687,14 @@ const Hero = ({ onBookClick }) => {
                   backdrop-blur-md
                   border border-[#EDE8DE]
                   rounded-2xl
-                  px-4 py-3
+                  p-2 lg:px-4 lg:py-3
                   shadow-[0_15px_35px_rgba(115,91,64,0.12)]
                 "
               >
                 <span className="w-9 h-9 rounded-full bg-[#EDE8DE] text-[#A9855D] flex items-center justify-center">
                   <Heart size={18} strokeWidth={1.6} />
                 </span>
-                <span className="text-xs sm:text-[13px] leading-snug text-[#49382E] font-medium text-left">
+                <span className="hidden lg:inline text-[13px] leading-snug text-[#49382E] font-medium text-left">
                   Cuidado
                   <br />
                   individualizado
@@ -759,14 +713,14 @@ const Hero = ({ onBookClick }) => {
                   backdrop-blur-md
                   border border-[#EDE8DE]
                   rounded-2xl
-                  px-4 py-3
+                  p-2 lg:px-4 lg:py-3
                   shadow-[0_15px_35px_rgba(115,91,64,0.12)]
                 "
               >
                 <span className="w-9 h-9 rounded-full bg-[#EDE8DE] text-[#A9855D] flex items-center justify-center">
                   <Sparkles size={18} strokeWidth={1.6} />
                 </span>
-                <span className="text-xs sm:text-[13px] leading-snug text-[#49382E] font-medium text-left">
+                <span className="hidden lg:inline text-[13px] leading-snug text-[#49382E] font-medium text-left">
                   Avaliação
                   <br />
                   personalizada
